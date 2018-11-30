@@ -1,0 +1,15 @@
+1) git clone https://github.com/swagger-api/swagger-codegen.git
+2) cd swagger-codegen
+3) git checkout v3.0.0-rc1 
+   - effettuare il checkout esattamente della versione del tag che stiamo usando come 'swagger.codegen.version' nel pom.xml principale
+     Per vedere le versioni esistenti usare il comando 'git tag -l'
+     Per essere sicuri di essersi posizionati nel tag giusto usare il comando 'git branch'
+4) mvn clean install (la compilazione terminera in errore)
+5) unzip modules/swagger-codegen-cli/target/swagger-codegen-cli.jar -d JAR
+6) cp -r JAR/v2/JavaJaxRS/cxf ../
+7) applicare la patch se non esiste.
+
+Per crearla la prima volta la patch, possedere due directory:
+- cxf: contiene i sorgenti modificati
+- cxf.orig: contiene i sorgenti originali
+ed eseguire il comando: 'diff -urNbB cxf.orig/ cxf/ > patch'

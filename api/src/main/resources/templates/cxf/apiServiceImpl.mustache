@@ -1,0 +1,75 @@
+package {{package}}.impl;
+
+import {{package}}.*;
+{{#imports}}import {{import}};
+{{/imports}}
+{{#useSpringAnnotationConfig}}
+import org.springframework.stereotype.Service;
+{{/useSpringAnnotationConfig}}
+import org.opensiope.servlets.core.api.authorization.AuthorizationManager;
+import org.opensiope.servlets.core.api.exception.CodiceEccezione;
+import org.gov4j.commons.api.impl.BaseImpl;
+import org.gov4j.commons.api.impl.ServiceContext;
+import org.opensiope.servlets.core.listener.JPAContext;
+{{#useSpringAnnotationConfig}}
+@Service("{{classname}}")
+{{/useSpringAnnotationConfig}}
+{{#description}}
+{{/description}}
+{{#appName}}
+/**
+ * {{{appName}}}
+ *
+ {{#appDescription}}
+ * <p>{{{appDescription}}}
+ {{/appDescription}}
+ *
+ */
+{{/appName}}
+public class {{classname}}ServiceImpl extends BaseImpl implements {{classname}} {
+
+	public {{classname}}ServiceImpl(){
+		super(org.slf4j.LoggerFactory.getLogger({{classname}}ServiceImpl.class));
+	}
+
+{{#operations}}
+{{#operation}}
+    {{#summary}}
+    /**
+     * {{summary}}
+     *
+     {{#notes}}
+     * {{notes}}
+     *
+     {{/notes}}
+     */
+    {{/summary}}
+	@Override
+	public {{>returnTypes}} {{nickname}}({{#allParams}}{{>queryParamsImpl}}{{>pathParamsImpl}}{{>headerParamsImpl}}{{>bodyParamsImpl}}{{>formParamsImpl}}{{#has this 'more'}}, {{/has}}{{/allParams}}) {
+		ServiceContext context = this.getContext();
+		try {
+			context.getLogger().info("Invocazione in corso ...");     
+
+			new AuthorizationManager().authorize(context);
+			context.getLogger().debug("Autorizzazione completata con successo");     
+                        
+			// TODO: Implement...
+        
+			context.getLogger().info("Invocazione completata con successo");
+			{{#useGenericResponse}}return Response.ok().entity("magic!").build();{{/useGenericResponse}}{{^useGenericResponse}}{{^vendorExtensions.x-java-is-response-void}}return null;{{/vendorExtensions.x-java-is-response-void}}{{/useGenericResponse}}
+     
+		}
+		catch(javax.ws.rs.WebApplicationException e) {
+			context.getLogger().error("Invocazione terminata con errore '4xx': %s",e, e.getMessage());
+			throw e;
+		}
+		catch(Exception e) {
+			context.getLogger().error("Invocazione terminata con errore: %s",e, e.getMessage());
+			throw CodiceEccezione.ERRORE_INTERNO.toException(e);
+		}
+    }
+    
+{{/operation}}
+}
+{{/operations}}
+

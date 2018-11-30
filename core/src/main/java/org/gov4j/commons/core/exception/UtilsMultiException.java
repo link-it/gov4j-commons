@@ -1,0 +1,114 @@
+package org.gov4j.commons.core.exception;
+
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+public class UtilsMultiException extends Exception {
+
+	private List<Throwable> exceptions = new ArrayList<>();
+	
+	public List<Throwable> getExceptions() {
+		return this.exceptions;
+	}
+	
+	public UtilsMultiException(String message, Throwable cause)
+	{
+		super(message, cause);
+		this.exceptions.add(cause);
+	}
+	public UtilsMultiException(Throwable cause)
+	{
+		super(cause);
+		this.exceptions.add(cause);
+	}
+	public UtilsMultiException(String message, Throwable ... cause)
+	{
+		super(message, (cause!=null && cause.length>0) ? cause[0] :  null);
+		if(cause!=null && cause.length>0) {
+			for (int i = 0; i < cause.length; i++) {
+				this.exceptions.add(cause[i]);		
+			}
+		}
+	}
+	public UtilsMultiException(Throwable ...cause)
+	{
+		super((cause!=null && cause.length>0) ? cause[0] :  null);
+		if(cause!=null && cause.length>0) {
+			for (int i = 0; i < cause.length; i++) {
+				this.exceptions.add(cause[i]);		
+			}
+		}
+	}
+	
+	@Override
+	public void printStackTrace(PrintStream s) {
+		if(this.exceptions!=null && !this.exceptions.isEmpty()) {
+			//for (int i = 0; i < this.exceptions.size(); i++) {
+			for (int i = (this.exceptions.size()-1); i >= 0; i--) {
+				if(i>0) {
+					s.print("\n");
+				}
+				s.print("MultiException at position "+(i+1)+": \n");
+				this.exceptions.get(i).printStackTrace(s);
+			}
+		}
+		else {
+			super.printStackTrace(s);
+		}
+	}
+
+	@Override
+	public void printStackTrace(PrintWriter s) {
+		if(this.exceptions!=null && !this.exceptions.isEmpty()) {
+			//for (int i = 0; i < this.exceptions.size(); i++) {
+			for (int i = (this.exceptions.size()-1); i >= 0; i--) {
+				if(i>0) {
+					s.print("\n");
+				}
+				s.print("MultiException at position "+(i+1)+": \n");
+				this.exceptions.get(i).printStackTrace(s);
+			}
+		}
+		else {
+			super.printStackTrace(s);
+		}
+	}
+	
+	@Override
+	public StackTraceElement[] getStackTrace() {
+		if(this.exceptions!=null && !this.exceptions.isEmpty()) {
+			List<StackTraceElement> listStackTraceElement = new ArrayList<>();
+			//for (int i = 0; i < this.exceptions.size(); i++) {
+			for (int i = (this.exceptions.size()-1); i >= 0; i--) {
+				StackTraceElement sElement = new StackTraceElement(UtilsMultiException.class.getName(), "Position_"+(i+1), "MultiException_"+(i+1), (i+1));
+				listStackTraceElement.add(sElement);
+				StackTraceElement[] tmp = this.exceptions.get(i).getStackTrace();
+				if(tmp!=null && tmp.length>0) {
+					for (int j = 0; j < tmp.length; j++) {
+						listStackTraceElement.add(tmp[j]);		
+					}
+				}
+			}
+			return listStackTraceElement.toArray(new StackTraceElement[1]);
+		}
+		else {
+			return super.getStackTrace();
+		}
+	}
+
+	
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UtilsMultiException() {
+		super();
+	}
+	public UtilsMultiException(String msg) {
+		super(msg);
+	}
+}
+
