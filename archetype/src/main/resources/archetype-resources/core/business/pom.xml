@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>${artifactId}</artifactId>
+	<packaging>jar</packaging>
+	<name>Business Layer</name>
+	<parent>
+		<groupId>${groupId}</groupId>
+		<artifactId>${rootArtifactId}-core</artifactId>
+		<version>${version}</version>
+		<relativePath>../</relativePath>    
+	</parent>
+		
+	<properties>
+		<rel-to-parent>../..</rel-to-parent>
+	</properties>
+	
+	<dependencies>
+		
+		<!--  OpenSiope -->
+		<dependency>
+			<groupId>${groupId}</groupId>
+			<artifactId>${rootArtifactId}-core-dao</artifactId>
+			<version>${version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.gov4j.commons</groupId>
+			<artifactId>gov4j-commons-xml</artifactId>
+		</dependency>
+		
+		<!--  Commons -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>xml-security</groupId>
+		    <artifactId>xmlsec</artifactId>
+		</dependency>
+				
+		
+		
+		<!-- Spring Security -->
+		<dependency>
+   			<groupId>org.springframework.security</groupId>
+   			<artifactId>spring-security-core</artifactId>
+		</dependency> 		
+		<dependency>
+   			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-ldap</artifactId>
+		</dependency> 		
+	    <dependency>
+	        <groupId>org.springframework.ldap</groupId>
+	        <artifactId>spring-ldap-core</artifactId>
+	    </dependency>
+
+	    <dependency>
+	      <groupId>io.swagger</groupId>
+	      <artifactId>swagger-annotations</artifactId>
+	    </dependency>
+	    <dependency>
+	      <groupId>com.squareup.okhttp</groupId>
+	      <artifactId>okhttp</artifactId>
+	    </dependency>
+	    <dependency>
+	      <groupId>com.squareup.okhttp</groupId>
+	      <artifactId>logging-interceptor</artifactId>
+	    </dependency>
+	    <dependency>
+	      <groupId>com.google.code.gson</groupId>
+	      <artifactId>gson</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+	      <groupId>joda-time</groupId>
+	      <artifactId>joda-time</artifactId>
+	    </dependency>
+
+	</dependencies>
+	
+</project>

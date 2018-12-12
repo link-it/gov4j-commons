@@ -1,0 +1,82 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="${version}" encoding="UTF-8"?>
+<b:beans xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd"
+        >
+
+	<b:import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<b:import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+
+
+	<!-- CXF OpenApiFeature -->
+    <b:bean id="openApiFeature" class="org.apache.cxf.jaxrs.openapi.OpenApiFeature">
+        <!-- customize some of the properties -->
+        <b:property name="prettyPrint" value="false"/>
+    </b:bean>
+    
+    <!-- Parameter Converter -->
+	<b:bean id="parameterConverter" class="org.gov4j.commons.api.converter.parameter.ParameterConverterProvider"/>
+
+	<!--  Object BodyReader -->
+	<b:bean id="objectMessageBodyReader" class="org.gov4j.commons.api.converter.body.ObjectMessageBodyReader"/>
+	
+	<!--  Jackson Provider for JSON/XML -->
+	<b:bean id="jacksonJsonProvider" class="org.gov4j.commons.api.converter.jackson.JacksonJsonProvider"/>
+	<b:bean id="jacksonXmlProvider" class="org.gov4j.commons.api.converter.jackson.JacksonXmlProvider"/>
+	
+	<!-- FaultBean Exception Mapper -->
+	<b:bean id="webApplicationExceptionMapper" class="org.gov4j.commons.api.exception.WebApplicationExceptionMapper"/>
+	
+	<!-- Interceptor -->
+	<b:bean id="dumpReceivedMessageToFileSystemInterceptor" class="org.gov4j.commons.api.interceptor.DumpReceivedMessageToFileSystemInterceptor"/>
+	<b:bean id="dumpSendMessageToFileSystemInterceptor" class="org.gov4j.commons.api.interceptor.DumpSendMessageToFileSystemInterceptor"/>
+
+	<!-- JAX-RS Service Impl -->
+
+	<!-- TODO aggiungere bean classi -->
+	<b:bean id="petMonitoraggio" class="org.opensiope.servlets.api_monitoraggio.api.impl.PetsApiServiceImpl"/>
+
+	<!-- CXF Configuration -->
+    <cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+        <cxf:inInterceptors>
+            <ref bean="dumpReceivedMessageToFileSystemInterceptor"/>
+        </cxf:inInterceptors>
+        <cxf:outInterceptors>
+            <ref bean="dumpSendMessageToFileSystemInterceptor"/>
+        </cxf:outInterceptors>
+    </cxf:bus>
+    
+
+	<!-- JAX-RS Configuration -->
+	
+	<!-- Basic Authentication -->
+	
+    <jaxrs:server id="apiMonitoraggio" address="/monitoraggio">
+        <jaxrs:serviceBeans>
+        	<ref bean="petMonitoraggio" />
+        </jaxrs:serviceBeans>  
+        <jaxrs:providers>
+        	<ref bean="parameterConverter" />
+        	<ref bean="objectMessageBodyReader"/>
+        	<ref bean="jacksonJsonProvider"/>
+        	<ref bean="jacksonXmlProvider"/>  
+        	<ref bean="webApplicationExceptionMapper" />     	        	    
+        </jaxrs:providers>
+		<jaxrs:features>
+            <ref bean="openApiFeature" />
+        </jaxrs:features>
+    </jaxrs:server>
+	
+</b:beans>

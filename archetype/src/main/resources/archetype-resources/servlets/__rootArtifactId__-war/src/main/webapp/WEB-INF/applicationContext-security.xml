@@ -1,0 +1,112 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="${version}" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+      
+	<!-- Implementazione custom di un authenticationProvider per gestire l'autenticazione tramite servizio IAM -->  
+	<b:bean id="authenticationProviderIAM" class="org.opensiope.servlets.core.springsec.authentication.provider.IAmServiceAuthenticationProvider" >
+		<b:property name="iamUserDetailsService" ref="userDetailServiceIam"/>
+	</b:bean>
+
+	<!-- Servizio di accesso alla base dati per il check delle utenze IAM -->
+	<b:bean id="userDetailServiceIam" class="org.opensiope.core.business.configurazione.IamBD" >	
+		<b:constructor-arg index="0" ref="jpaManagerOpensiope"/>
+	</b:bean> 
+	<!-- Factory per ottenere il jpaContext e jpaManager -->
+	<b:bean id="jpaContextFactory" class="org.opensiope.servlets.core.listener.JPAContext"></b:bean> 
+	<b:bean id="jpaManagerOpensiope" class="org.opensiope.core.dao.JPAManager" factory-method="getContextDBManager" factory-bean="jpaContextFactory">
+	</b:bean>
+	<!-- entry point per l'httpbasic per gestire il contenuto della response nel caso id utenza non autorizzata. -->
+	<b:bean id="formAuthenticationEntryPoint" class="org.opensiope.servlets.core.api.authentication.FormAuthenticationEntryPoint" />
+	
+	<!-- handler per le chiamate di login che vanno male -->
+	<b:bean id="authFailureHandler" class="org.opensiope.servlets.core.api.authentication.handler.DefaultAuthenticationFailureHandler" />
+	<!-- handler per le chiamate di login che vanno bene -->
+	<b:bean id="authSuccessHandler" class="org.opensiope.servlets.api_monitoraggio.api.authentication.handler.ApiMonitoraggioAuthenticationSuccessHandler" />
+	<!-- handler per le chiamate di logout che vanno bene -->
+	<b:bean id="logoutSuccessHandler" class="org.gov4j.commons.api.authentication.handler.DefaultLogoutSuccessHandler" />
+	
+	
+	<!-- Abilito gestione della sicurezza tramite annotazioni nel codice Java -->
+	<global-method-security
+		secured-annotations="enabled">
+	</global-method-security>
+
+	<!-- Definisco il sistema di autenticazione, nel nostro caso utilizziamo un unico manager con due provider distinti uno per operatori e uno per applicazioni -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="authenticationProviderIAM">
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!-- Configurazione della sicurezza su tutte le url esposte dall'applicazione
+		create-session="stateless" sta ad indicare che non vogliamo nessuna sessione ed ogni richiesta dovra' essere autorizzata.
+		use-expressions="false" sta ad indicare che non posso scrivere Expression per indicare le regole di accesso, ma solo ruoli
+	 -->
+	 
+	<!-- Configurazione Basic -->
+		<http auto-config="false" use-expressions="false" pattern="/**" create-session="ifRequired" entry-point-ref="formAuthenticationEntryPoint" >  
+
+		<csrf disabled="true" />
+		
+<!-- 		<access-denied-handler ref="formAuthenticationEntryPoint" /> -->
+		
+		<intercept-url pattern="/console/*.css" access="IS_AUTHENTICATED_ANONYMOUSLY" /> 
+		<intercept-url pattern="/console/*.ico" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/console/*.js" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/console/*.eot" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/console/*.svg" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/console/*.woff2" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/console/*.woff" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/console/*.tff" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/console/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/api/**" access="ROLE_USER" />
+		
+		<form-login login-page="/console/public/login.jsp" username-parameter="username" authentication-success-handler-ref="authSuccessHandler"
+			password-parameter="password" authentication-failure-handler-ref="authFailureHandler" 
+				login-processing-url="/console/login" /> 
+                       
+          <logout logout-url="/console/logout" success-handler-ref="logoutSuccessHandler" 
+          delete-cookies="JSESSIONID" invalidate-session="true" />
+		
+		<anonymous />
+		
+       <session-management session-fixation-protection="migrateSession" invalid-session-url="/console/"> 
+       			<concurrency-control expired-url="/console/" max-sessions="2" />
+       </session-management>
+		
+		
+        <headers>
+              <content-type-options disabled="true"/>
+              <frame-options disabled="true"/>
+              <xss-protection disabled="true"/>
+      </headers>
+
+	</http>
+	
+	
+<!-- 	<http auto-config="false" use-expressions="false" create-session="stateless" pattern="/api/**"> -->
+
+<!-- 		<csrf disabled="true"/> -->
+
+ 		<!-- tutte le url dell'applicazione sono accessibili ad utenze che hanno almeno il ruolo ROLE_USER --> 
+<!-- 		<intercept-url pattern="/api/**" access="ROLE_USER" /> -->
+
+		<!-- Entry point della configurazione, impostato per supportare l'autenticazione basic --> 
+<!-- 		<http-basic entry-point-ref="opensiopeBasicAuthenticationEntryPoint" /> -->
+		
+<!-- 		<headers> -->
+<!-- 	        <content-type-options disabled="true"/> -->
+<!-- 	        <frame-options disabled="true"/> -->
+<!-- 	        <xss-protection disabled="true"/> -->
+<!--       	</headers> -->
+<!-- 	</http> -->
+	
+</b:beans>

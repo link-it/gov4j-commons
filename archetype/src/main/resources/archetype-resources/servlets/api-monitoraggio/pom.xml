@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>${artifactId}</artifactId>
+	<packaging>jar</packaging>
+	<name>API rest per il monitoraggio</name>
+	<parent>
+		<groupId>${groupId}</groupId>
+		<artifactId>${rootArtifactId}-servlets</artifactId>
+		<version>${version}</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<properties>
+		<rel-to-parent>..</rel-to-parent>
+	</properties>
+
+	<dependencies>
+
+		<!-- OpenSiope -->
+		<dependency>
+			<groupId>${groupId}</groupId>
+			<artifactId>${rootArtifactId}-servlets-core</artifactId>
+			<version>${version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>${swagger.codegen.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+							<language>jaxrs-cxf</language>
+							<configOptions>
+								<dateLibrary>joda</dateLibrary>
+								<!-- <sourceFolder>src/gen/java/</sourceFolder> -->
+								<sourceFolder>target/generated-sources/java/</sourceFolder>
+								<apiPackage>${rootArtifactId}.servlets.api_monitoraggio.api</apiPackage>
+								<invokerPackage>${rootArtifactId}.servlets.api_monitoraggio.impl</invokerPackage>
+								<modelPackage>${rootArtifactId}.servlets.api_monitoraggio.model</modelPackage>
+							</configOptions>
+							<output>${project.basedir}</output>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

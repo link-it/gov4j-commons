@@ -1,0 +1,3 @@
+default.configuration=opensiope-core-orm
+eclipse.preferences.version=1
+hibernate3.enabled=true
