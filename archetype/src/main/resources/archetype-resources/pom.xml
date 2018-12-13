@@ -22,6 +22,8 @@
 				
 		<!-- Gov4J Commons -->
 		<org.gov4j.commons.version>1.0.0-SNAPSHOT</org.gov4j.commons.version>
+		<!-- OpenSPCooop2 Utils version -->
+		<openspcoop2.utils.version>3.1.0-SNAPSHOT</openspcoop2.utils.version>
 				
 		<!--  Commons -->
 		<commons.lang.version>2.6</commons.lang.version>
@@ -55,7 +57,7 @@
 	    <joda.version>2.10</joda.version>
 	    
 	    <!-- Swagger-codegen -->
-	    <swagger.codegen.version>3.0.0-rc1</swagger.codegen.version>
+	    <swagger.codegen.version>3.0.0-gov4j-1</swagger.codegen.version>
 	    
 	    <!-- Swagger-annotations -->
 	    <swagger.version>1.5.20</swagger.version>
@@ -108,6 +110,13 @@
 			<artifactId>gov4j-commons-api</artifactId>
 			<version>${org.gov4j.commons.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.openspcoop2.utils</groupId>
+			<artifactId>openspcoop2_utils-jaxrs</artifactId>
+			<version>${openspcoop2.utils.version}</version>
+		</dependency> 
+		
 		
 	        <!--  Commons -->
 	        <dependency>
@@ -353,5 +362,26 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>openspcoop2-releases</id>
+	<url>http://maven.openspcoop.org/content/repositories/public/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>openspcoop2-snapshots</id>
+	<url>http://maven.openspcoop.org/content/repositories/snapshots/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <repositories>
+    <repository>
+      <id>openspcoop2-releases</id>
+	<url>http://maven.openspcoop.org/content/repositories/public/</url>
+    </repository>
+    <repository>
+      <id>openspcoop2-snapshots</id>
+	<url>http://maven.openspcoop.org/content/repositories/snapshots/</url>
+    </repository>
+  </repositories>
 
 </project>
