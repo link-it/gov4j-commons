@@ -43,7 +43,7 @@
 	<!-- JAX-RS Service Impl -->
 
 	<!-- TODO aggiungere bean classi -->
-	<b:bean id="petMonitoraggio" class="org.opensiope.servlets.api_monitoraggio.api.impl.PetsApiServiceImpl"/>
+	<b:bean id="petMonitoraggio" class="${package}.servlets.api_monitoraggio.api.impl.PetsApiServiceImpl"/>
 
 	<!-- CXF Configuration -->
     <cxf:bus>

@@ -17,7 +17,7 @@
 	
 	<dependencies>
 		
-		<!--  OpenSiope -->
+		<!-- Core DAO  -->
 		<dependency>
 			<groupId>${groupId}</groupId>
 			<artifactId>${rootArtifactId}-core-dao</artifactId>

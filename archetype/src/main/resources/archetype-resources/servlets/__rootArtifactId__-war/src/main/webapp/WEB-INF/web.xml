@@ -6,19 +6,19 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
-	<display-name>opensiope-api-integrazione</display-name>
+	<display-name>${rootArtifactId}-api-integrazione</display-name>
 	
 	<context-param>
 		<param-name>projectHome</param-name>
-		<param-value>OPENSIOPE_HOME</param-value>
+		<param-value>${rootArtifactId}_HOME</param-value>
 	</context-param>
 	<context-param>
 		<param-name>applicationConfig</param-name>
-		<param-value>/opensiope.properties</param-value>
+		<param-value>/${rootArtifactId}.properties</param-value>
 	</context-param>
 	<context-param>
 		<param-name>applicationLocalConfig</param-name>
-		<param-value>opensiope_local.properties</param-value>
+		<param-value>${rootArtifactId}_local.properties</param-value>
 	</context-param>
 	<context-param>
 		<param-name>loggerConfig</param-name>
@@ -26,15 +26,15 @@
 	</context-param>
 	<context-param>
 		<param-name>loggerLocalConfig</param-name>
-		<param-value>opensiope_local.log4j2.properties</param-value>
+		<param-value>${rootArtifactId}_local.log4j2.properties</param-value>
 	</context-param>
 	<context-param>
 		<param-name>databaseConfig</param-name>
-		<param-value>/opensiope.database.properties</param-value>
+		<param-value>/${rootArtifactId}.database.properties</param-value>
 	</context-param>
 	<context-param>
 		<param-name>databaseLocalConfig</param-name>
-		<param-value>opensiope_local.database.properties</param-value>
+		<param-value>${rootArtifactId}_local.database.properties</param-value>
 	</context-param>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -48,7 +48,7 @@
 		<listener-class>org.gov4j.commons.api.listener.LoggerManager</listener-class>
 	</listener>
 	<listener>
-		<listener-class>org.opensiope.servlets.core.listener.JPAContext</listener-class>
+		<listener-class>${package}.servlets.core.listener.JPAContext</listener-class>
 	</listener>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

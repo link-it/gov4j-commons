@@ -20,8 +20,9 @@
 		<dependency>
 			<groupId>org.openspcoop2.utils</groupId>
 			<artifactId>openspcoop2_utils-jaxrs</artifactId>
-		</dependency> 
-		<!-- OpenSiope -->
+		</dependency>
+ 
+		<!-- Servlets CORE -->
 		<dependency>
 			<groupId>${groupId}</groupId>
 			<artifactId>${rootArtifactId}-servlets-core</artifactId>
@@ -61,9 +62,9 @@
 								<dateLibrary>joda</dateLibrary>
 								<!-- <sourceFolder>src/gen/java/</sourceFolder> -->
 								<sourceFolder>target/generated-sources/java/</sourceFolder>
-								<apiPackage>${rootArtifactId}.servlets.api_monitoraggio.api</apiPackage>
-								<invokerPackage>${rootArtifactId}.servlets.api_monitoraggio.impl</invokerPackage>
-								<modelPackage>${rootArtifactId}.servlets.api_monitoraggio.model</modelPackage>
+								<apiPackage>${package}.servlets.api_monitoraggio.api</apiPackage>
+								<invokerPackage>${package}.servlets.api_monitoraggio.impl</invokerPackage>
+								<modelPackage>${package}.servlets.api_monitoraggio.model</modelPackage>
 							</configOptions>
 							<output>${project.basedir}</output>
 							<generateApiTests>false</generateApiTests>

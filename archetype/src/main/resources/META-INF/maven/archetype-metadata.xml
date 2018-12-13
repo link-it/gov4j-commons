@@ -9,6 +9,13 @@
         <include>**/*.xml</include>
       </includes>
     </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>LICENSE</include>
+        <include>README.md</include>
+      </includes>
+    </fileSet>
   </fileSets>
   <modules>
     <module id="${rootArtifactId}-core" dir="core" name="${rootArtifactId}-core">
@@ -54,21 +61,6 @@
       </modules>
     </module>
     <module id="${rootArtifactId}-servlets" dir="servlets" name="${rootArtifactId}-servlets">
-      <fileSets>
-        <fileSet encoding="UTF-8">
-          <directory>templates/cxf</directory>
-          <includes>
-            <include>**/*.md</include>
-            <include>**/*.mustache</include>
-          </includes>
-        </fileSet>
-        <fileSet encoding="UTF-8">
-          <directory>templates</directory>
-          <includes>
-            <include>**/*.</include>
-          </includes>
-        </fileSet>
-      </fileSets>
       <modules>
         <module id="${rootArtifactId}-servlets-core" dir="core" name="${rootArtifactId}-servlets-core">
           <fileSets>
@@ -94,10 +86,9 @@
                 <include>**/*.yaml</include>
               </includes>
             </fileSet>
-            <fileSet encoding="UTF-8">
+            <fileSet filtered="true" encoding="UTF-8">
               <directory></directory>
               <includes>
-                <include>.gitignore</include>
                 <include>.swagger-codegen-ignore</include>
               </includes>
             </fileSet>

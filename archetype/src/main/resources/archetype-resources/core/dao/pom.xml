@@ -17,7 +17,7 @@
 	
 	<dependencies>
 		
-		<!--  OpenSiope -->
+		<!--  Core ORM -->
 		<dependency>
 			<groupId>${groupId}</groupId>
 			<artifactId>${rootArtifactId}-core-orm</artifactId>
