@@ -37,7 +37,7 @@ public abstract class CodiceEccezione<T> {
 	public abstract T toFaultBean();
 	
 	public abstract T toFaultBean(String dettaglio);
-	public abstract T toFaultBean(Exception e);
+	public abstract T toFaultBean(Throwable e);
 
 	public ResponseBuilder toFaultResponseBuilder() {
 		return this.toFaultResponseBuilder(true);
@@ -54,7 +54,7 @@ public abstract class CodiceEccezione<T> {
 		T faultBean = this.toFaultBean(dettaglio);
 		return Response.status(this.code).entity(faultBean).type(MediaType.APPLICATION_JSON);
 	}
-	public ResponseBuilder toFaultResponseBuilder(Exception e) {
+	public ResponseBuilder toFaultResponseBuilder(Throwable e) {
 		T faultBean = this.toFaultBean(e);
 		return Response.status(this.code).entity(faultBean).type(MediaType.APPLICATION_JSON);
 	}
@@ -68,7 +68,7 @@ public abstract class CodiceEccezione<T> {
 	public Response toFaultResponse(String dettaglio) {
 		return this.toFaultResponseBuilder(dettaglio).build();
 	}
-	public Response toFaultResponse(Exception e) {
+	public Response toFaultResponse(Throwable e) {
 		return this.toFaultResponseBuilder(e).build();
 	}
 
@@ -98,7 +98,7 @@ public abstract class CodiceEccezione<T> {
 		Response r = this.toFaultResponse(dettaglio);
 		return this.toException(r);
 	}
-	public javax.ws.rs.WebApplicationException toException(Exception e){
+	public javax.ws.rs.WebApplicationException toException(Throwable e){
 		Response r = this.toFaultResponse(e);
 		return this.toException(r);
 	}
@@ -118,7 +118,7 @@ public abstract class CodiceEccezione<T> {
 	public void throwException(String dettaglio) throws javax.ws.rs.WebApplicationException{
 		throw toException(dettaglio);
 	}
-	public void throwException(Exception e) throws javax.ws.rs.WebApplicationException{
+	public void throwException(Throwable e) throws javax.ws.rs.WebApplicationException{
 		throw toException(e);
 	}
 	

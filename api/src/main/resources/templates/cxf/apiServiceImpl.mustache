@@ -6,11 +6,8 @@ import {{package}}.*;
 {{#useSpringAnnotationConfig}}
 import org.springframework.stereotype.Service;
 {{/useSpringAnnotationConfig}}
-import org.opensiope.servlets.core.api.authorization.AuthorizationManager;
-import org.opensiope.servlets.core.api.exception.CodiceEccezione;
 import org.gov4j.commons.api.impl.BaseImpl;
 import org.gov4j.commons.api.impl.ServiceContext;
-import org.opensiope.servlets.core.listener.JPAContext;
 {{#useSpringAnnotationConfig}}
 @Service("{{classname}}")
 {{/useSpringAnnotationConfig}}

@@ -4,6 +4,6 @@ import org.gov4j.commons.api.impl.ServiceContext;
 
 public interface IAuthorizationManager {
 
-	public void authorize(ServiceContext context);
+	public void authorize(ServiceContext context, Object config);
 
 }

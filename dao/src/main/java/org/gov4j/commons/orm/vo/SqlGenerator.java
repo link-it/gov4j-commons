@@ -25,22 +25,18 @@ public class SqlGenerator {
 		Files.deleteIfExists(Paths.get(create));
         Files.deleteIfExists(Paths.get(drop));
 
-		Map<String,String> map = getMap(persistenceId, folder, tipoDatabase);
+		Map<String,String> map = getMap(persistenceId, create, drop, tipoDatabase);
         Persistence.generateSchema(persistenceId, map);
 	}
 
-	private static Map<String, String> getMap(String persistenceId, String folder, DatabaseType tipoDatabase) throws IOException {
+	private static Map<String, String> getMap(String persistenceId, String create, String drop, DatabaseType tipoDatabase) throws IOException {
 		Map<String, String> map = new HashMap<String, String>();
-
-		String folderTipoDatabase = folder + tipoDatabase.toString().toLowerCase();
-		String create= folderTipoDatabase +  "/"+persistenceId+".sql";
-		String drop = folderTipoDatabase+ "/"+persistenceId+"_drop.sql";
 
         map.put("javax.persistence.schema-generation.scripts.action", "drop-and-create");
         map.put("javax.persistence.schema-generation.scripts.create-target", create);
         map.put("javax.persistence.schema-generation.scripts.drop-target", drop);
         map.put("hibernate.hbm2ddl.delimiter", ";");
-        map.put("hibernate.hbm2ddl.format", "true");
+        map.put("hibernate.format_sql", "true");
 		
         switch(tipoDatabase) {
 		case DERBY:
