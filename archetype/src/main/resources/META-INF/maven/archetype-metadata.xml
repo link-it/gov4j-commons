@@ -1,30 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="${rootArtifactId}"
-    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+<archetype-descriptor xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="config"
+    xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <fileSets>
     <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/main/webapp</directory>
+      <includes>
+        <include>**/*.jsp</include>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
       <directory>src/main/resources</directory>
+      <includes>
+        <include>**/*.io</include>
+        <include>**/*.yaml</include>
+        <include>**/*.sql</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>integration-test</directory>
       <includes>
         <include>**/*.xml</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
+      <directory>integration-test/src</directory>
+      <includes>
+        <include>**/*.java</include>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>integration-test</directory>
+      <includes>
+        <include>**/*.gitignore</include>
+        <include>**/*.README</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>integration-test/src</directory>
+      <includes>
+        <include>**/*.feature</include>
+        <include>**/*.js</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>integration-test/log</directory>
+      <includes>
+        <include>**/*.log</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>.settings</directory>
+      <includes>
+        <include>**/*.prefs</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
       <directory></directory>
       <includes>
-        <include>LICENSE</include>
+        <include>.project</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>.gitignore</include>
         <include>README.md</include>
       </includes>
     </fileSet>
   </fileSets>
   <modules>
-    <module id="${rootArtifactId}-core" dir="core" name="${rootArtifactId}-core">
+    <module id="core" dir="core" name="core">
+      <fileSets>
+        <fileSet encoding="UTF-8">
+          <directory>.settings</directory>
+          <includes>
+            <include>**/*.prefs</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory></directory>
+          <includes>
+            <include>.project</include>
+          </includes>
+        </fileSet>
+      </fileSets>
       <modules>
-        <module id="${rootArtifactId}-core-core" dir="core" name="${rootArtifactId}-core-core">
-        </module>
-        <module id="${rootArtifactId}-core-orm" dir="orm" name="${rootArtifactId}-core-orm">
+        <module id="utils" dir="utils" name="utils">
           <fileSets>
-            <fileSet filtered="true" encoding="UTF-8">
+            <fileSet filtered="true" packaged="true" encoding="UTF-8">
+              <directory>src/main/java</directory>
+              <includes>
+                <include>**/*.java</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>.gitignore</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+        </module>
+        <module id="orm" dir="orm" name="orm">
+          <fileSets>
+            <fileSet filtered="true" packaged="true" encoding="UTF-8">
               <directory>src/main/java</directory>
               <includes>
                 <include>**/*.java</include>
@@ -36,33 +118,111 @@
                 <include>**/*.xml</include>
               </includes>
             </fileSet>
+            <fileSet filtered="true" encoding="UTF-8">
+              <directory>.settings</directory>
+              <includes>
+                <include>**/*.xml</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory>.settings</directory>
+              <includes>
+                <include>**/*.component</include>
+                <include>**/*.prefs</include>
+              </includes>
+            </fileSet>
+            <fileSet filtered="true" encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>.classpath</include>
+                <include>.project</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>.gitignore</include>
+              </includes>
+            </fileSet>
           </fileSets>
         </module>
-        <module id="${rootArtifactId}-core-dao" dir="dao" name="${rootArtifactId}-core-dao">
+        <module id="dao" dir="dao" name="dao">
           <fileSets>
-            <fileSet filtered="true" encoding="UTF-8">
+            <fileSet filtered="true" packaged="true" encoding="UTF-8">
               <directory>src/main/java</directory>
               <includes>
                 <include>**/*.java</include>
               </includes>
             </fileSet>
+            <fileSet filtered="true" encoding="UTF-8">
+              <directory>.settings</directory>
+              <includes>
+                <include>**/*.xml</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory>.settings</directory>
+              <includes>
+                <include>**/*.component</include>
+                <include>**/*.prefs</include>
+              </includes>
+            </fileSet>
+            <fileSet filtered="true" encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>.classpath</include>
+                <include>.project</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>.gitignore</include>
+              </includes>
+            </fileSet>
           </fileSets>
         </module>
-        <module id="${rootArtifactId}-core-business" dir="business" name="${rootArtifactId}-core-business">
+        <module id="business" dir="business" name="business">
           <fileSets>
-            <fileSet filtered="true" encoding="UTF-8">
+            <fileSet filtered="true" packaged="true" encoding="UTF-8">
               <directory>src/main/java</directory>
               <includes>
                 <include>**/*.java</include>
+              </includes>
+            </fileSet>
+            <fileSet filtered="true" encoding="UTF-8">
+              <directory>.settings</directory>
+              <includes>
+                <include>**/*.xml</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory>.settings</directory>
+              <includes>
+                <include>**/*.component</include>
+                <include>**/*.prefs</include>
+              </includes>
+            </fileSet>
+            <fileSet filtered="true" encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>.classpath</include>
+                <include>.project</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>.gitignore</include>
               </includes>
             </fileSet>
           </fileSets>
         </module>
       </modules>
     </module>
-    <module id="${rootArtifactId}-servlets" dir="servlets" name="${rootArtifactId}-servlets">
+        <module id="servlets" dir="servlets" name="servlets">
       <modules>
-        <module id="${rootArtifactId}-servlets-core" dir="core" name="${rootArtifactId}-servlets-core">
+        <module id="servlets-core" dir="core" name="servlets-core">
           <fileSets>
             <fileSet filtered="true" encoding="UTF-8">
               <directory>src/main/java</directory>
@@ -72,7 +232,7 @@
             </fileSet>
           </fileSets>
         </module>
-        <module id="${rootArtifactId}-servlets-api-monitoraggio" dir="api-monitoraggio" name="${rootArtifactId}-servlets-api-monitoraggio">
+        <module id="api-monitoraggio" dir="api-monitoraggio" name="api-monitoraggio">
           <fileSets>
             <fileSet filtered="true" encoding="UTF-8">
               <directory>src/main/java</directory>
@@ -94,7 +254,7 @@
             </fileSet>
           </fileSets>
         </module>
-        <module id="${rootArtifactId}-servlets-${rootArtifactId}-war" dir="__rootArtifactId__-war" name="${rootArtifactId}-servlets-${rootArtifactId}-war">
+        <module id="${rootArtifactId}-war" dir="__rootArtifactId__-war" name="${rootArtifactId}-war">
           <fileSets>
             <fileSet filtered="true" encoding="UTF-8">
               <directory>src/main/resources</directory>

@@ -6,7 +6,7 @@
 	<name>Classi di base per tutte le servlets</name>
 	<parent>
 		<groupId>${groupId}</groupId>
-		<artifactId>${rootArtifactId}-servlets</artifactId>
+		<artifactId>servlets</artifactId>
 		<version>${version}</version>
 		<relativePath>../</relativePath>
 	</parent>
@@ -20,13 +20,8 @@
 		<!-- Core Business -->
 		<dependency>
 		    <groupId>${groupId}</groupId>
-		    <artifactId>${rootArtifactId}-core-business</artifactId>
+		    <artifactId>business</artifactId>
 		    <version>${version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.gov4j.commons</groupId>
-			<artifactId>gov4j-commons-api</artifactId>
 		</dependency>
 		
 		<dependency>

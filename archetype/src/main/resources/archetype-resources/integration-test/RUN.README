@@ -1,0 +1,7 @@
+ - Per eseguire i test:
+	
+		mvn test
+
+ - Per eseguire una specifica feature:
+
+		mvn test -Dkarate.options="classpath:karate/pagopa/v1/domini.feature"

@@ -1,0 +1,145 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0"?>
+<entity-mappings
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/${artifactId}"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/${artifactId} http://xmlns.jcp.org/xml/ns/persistence/${artifactId}_2_2.xsd"
+	version="2.2">
+
+	 <persistence-unit-metadata>
+    	<xml-mapping-metadata-complete/>
+  	</persistence-unit-metadata>
+  	
+	<package>${package}.govlet.pagopa.${parentArtifactId}.${artifactId}.vo.config</package>
+
+	<entity class="StazioneVO" access="FIELD">
+		<table name="stazioni">
+			<index column-list="identificativo_stazione" name="identificativoStazioneIdx" unique="true"/>
+		</table>
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value generator="generator_stazioni"
+					strategy="SEQUENCE" />
+				<sequence-generator allocation-size="1"
+					name="generator_stazioni" sequence-name="seq_stazioni" />
+			</id>
+			<basic name="identificativoStazione">
+				<column name="identificativo_stazione" nullable="false"
+					length="35" />
+			</basic>
+			<basic name="intermediario">
+				<column name="intermediario" nullable="false"
+					length="35" />
+			</basic>
+			<basic name="password">
+				<column name="password" nullable="false"
+					length="35" />
+			</basic>
+		</attributes>
+	</entity>
+
+	<entity class="DominioVO" access="FIELD">
+		<table name="domini">
+			<index column-list="identificativo_dominio" name="identificativoDominioIdx" unique="true"/>
+		</table>
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value generator="generator_domini"
+					strategy="SEQUENCE" />
+				<sequence-generator allocation-size="1"
+					name="generator_domini" sequence-name="seq_domini" />
+			</id>
+			<basic name="identificativoDominio">
+				<column name="identificativo_dominio" nullable="false"
+					length="35" />
+			</basic>
+			<basic name="anagrafica">
+				<column name="anagrafica" nullable="false"
+					length="70" />
+			</basic>
+			<basic name="indirizzo">
+				<column name="indirizzo" nullable="true"
+					length="70" />
+			</basic>
+			<basic name="civico">
+				<column name="civico" nullable="true"
+					length="16" />
+			</basic>
+			<basic name="cap">
+				<column name="cap" nullable="true"
+					length="16" />
+			</basic>
+			<basic name="localita">
+				<column name="localita" nullable="true"
+					length="70" />
+			</basic>
+			<basic name="provincia">
+				<column name="provincia" nullable="true"
+					length="70" />
+			</basic>
+			<basic name="nazione">
+				<column name="nazione" nullable="true"
+					length="70" />
+			</basic>
+			
+		</attributes>
+	</entity>
+
+	<entity class="UnitaOperativaVO" access="FIELD">
+		<table name="unita_operative">
+			<index column-list="identificativo_unita" name="identificativoUnitaIdx" unique="true"/>
+		</table>
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value generator="generator_unita_operative"
+					strategy="SEQUENCE" />
+				<sequence-generator allocation-size="1"
+					name="generator_unita_operative" sequence-name="seq_unita_operative" />
+			</id>	
+			
+			<basic name="identificativoUnita">
+				<column name="identificativo_unita" nullable="false"
+					length="35" />
+			</basic>
+			
+			<basic name="anagrafica">
+				<column name="anagrafica" nullable="false"
+					length="70" />
+			</basic>
+			<basic name="indirizzo">
+				<column name="indirizzo" nullable="true"
+					length="70" />
+			</basic>
+			<basic name="civico">
+				<column name="civico" nullable="true"
+					length="16" />
+			</basic>
+			<basic name="cap">
+				<column name="cap" nullable="true"
+					length="16" />
+			</basic>
+			<basic name="localita">
+				<column name="localita" nullable="true"
+					length="70" />
+			</basic>
+			<basic name="provincia">
+				<column name="provincia" nullable="true"
+					length="70" />
+			</basic>
+			<basic name="nazione">
+				<column name="nazione" nullable="true"
+					length="70" />
+			</basic>
+			
+			  <many-to-one name="dominio" optional="false">
+	            <join-column name="domini_id"/>
+	        </many-to-one>
+		</attributes>
+	</entity>
+
+</entity-mappings>

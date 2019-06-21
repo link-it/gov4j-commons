@@ -6,43 +6,95 @@
 	<name>Object Relational Model</name>
 	<parent>
 		<groupId>${groupId}</groupId>
-		<artifactId>${rootArtifactId}-core</artifactId>
+		<artifactId>core</artifactId>
 		<version>${version}</version>
-		<relativePath>../</relativePath>    
+		<relativePath>../</relativePath>
 	</parent>
-		
+
 	<properties>
 		<rel-to-parent>../..</rel-to-parent>
 	</properties>
-	
+
 	<dependencies>
 
-		<!--  Core -->
-		<dependency>
+		<!-- Core -->
+		<!-- <dependency>
 			<groupId>${groupId}</groupId>
-			<artifactId>${rootArtifactId}-core-core</artifactId>
+			<artifactId>${rootArtifactId}.core.utils</artifactId>
 			<version>${version}</version>
+		</dependency> -->
+
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.gov4j.commons</groupId>
-			<artifactId>gov4j-commons-dao</artifactId>
+			<groupId>org.openspcoop2.utils</groupId>
+			<artifactId>openspcoop2_utils-sql</artifactId>
 		</dependency>
 
-	
-		<!-- Test -->		
+		<dependency>
+			<groupId>org.openspcoop2.utils</groupId>
+			<artifactId>openspcoop2_utils-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+
+
+		<!-- Test -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 		</dependency>
-				
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<scope>test</scope>
-		</dependency>
-				
+
 	</dependencies>
-	
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.bsc.maven</groupId>
+				<artifactId>maven-processor-plugin</artifactId>
+				<version>2.0.5</version>
+				<executions>
+					<execution>
+						<id>process</id>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<phase>generate-sources</phase>
+						<configuration>
+							<processors>
+								<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+							</processors>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.hibernate</groupId>
+						<artifactId>hibernate-jpamodelgen</artifactId>
+						<version>5.4.3.Final</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+
+	</build>
+
+
 </project>

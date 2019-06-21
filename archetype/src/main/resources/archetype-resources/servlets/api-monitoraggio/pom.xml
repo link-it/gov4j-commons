@@ -6,7 +6,7 @@
 	<name>API rest per il monitoraggio</name>
 	<parent>
 		<groupId>${groupId}</groupId>
-		<artifactId>${rootArtifactId}-servlets</artifactId>
+		<artifactId>servlets</artifactId>
 		<version>${version}</version>
 		<relativePath>../</relativePath>
 	</parent>
@@ -25,7 +25,7 @@
 		<!-- Servlets CORE -->
 		<dependency>
 			<groupId>${groupId}</groupId>
-			<artifactId>${rootArtifactId}-servlets-core</artifactId>
+			<artifactId>servlets-core</artifactId>
 			<version>${version}</version>
 		</dependency>
 

@@ -6,7 +6,7 @@
 	<name>Data Access Object</name>
 	<parent>
 		<groupId>${groupId}</groupId>
-		<artifactId>${rootArtifactId}-core</artifactId>
+		<artifactId>core</artifactId>
 		<version>${version}</version>
 		<relativePath>../</relativePath>    
 	</parent>
@@ -20,14 +20,10 @@
 		<!--  Core ORM -->
 		<dependency>
 			<groupId>${groupId}</groupId>
-			<artifactId>${rootArtifactId}-core-orm</artifactId>
+			<artifactId>orm</artifactId>
 			<version>${version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.gov4j.commons</groupId>
-			<artifactId>gov4j-commons-dao</artifactId>
-		</dependency>
 		
 		<!-- Test -->
 		<dependency>
@@ -35,11 +31,6 @@
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 		</dependency>		
-		<dependency>
-		    <groupId>org.apache.derby</groupId>
-		    <artifactId>derby</artifactId>
-		    <scope>test</scope>
-		</dependency>
 				
 	</dependencies>
 </project>
