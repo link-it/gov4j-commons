@@ -1,14 +1,13 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.govlet.pagopa.${parentArtifactId}.${artifactId}.vo.config;
+package ${package}.${parentArtifactId}.vo.${artifactId};
 
-public class UnitaOperativaVO {
+public class DominioVO {
 
 	private Long id;
 	
-	private DominioVO dominio;
-	private String identificativoUnita;
+	private String identificativoDominio;
 	private String anagrafica;
 	private String indirizzo;
 	private String civico;
@@ -22,12 +21,12 @@ public class UnitaOperativaVO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public String getIdentificativoUnita() {
-		return identificativoUnita;
+
+	public String getIdentificativoDominio() {
+		return this.identificativoDominio;
 	}
-	public void setIdentificativoUnita(String identificativoUnita) {
-		this.identificativoUnita = identificativoUnita;
+	public void setIdentificativoDominio(String identificativoDominio) {
+		this.identificativoDominio = identificativoDominio;
 	}
 	public String getAnagrafica() {
 		return this.anagrafica;
@@ -70,12 +69,6 @@ public class UnitaOperativaVO {
 	}
 	public void setNazione(String nazione) {
 		this.nazione = nazione;
-	}
-	public DominioVO getDominio() {
-		return dominio;
-	}
-	public void setDominio(DominioVO dominio) {
-		this.dominio = dominio;
 	}
 
 }

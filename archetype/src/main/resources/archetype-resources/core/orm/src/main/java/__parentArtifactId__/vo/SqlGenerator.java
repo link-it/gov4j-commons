@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.govlet.pagopa.${parentArtifactId}.${artifactId}.vo;
+package ${package}.${parentArtifactId}.vo;
 
 import java.io.IOException;
 
